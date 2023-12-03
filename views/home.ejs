@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="styles/styles.css">
+</head>
+
+<body>
+    <h1>All books data:</h1>
+    <div class="table">
+        <table>
+            <tr>
+            <th>Name</th>
+            <th>Author</th>
+            <th>Pages</th>
+            <th>Price($)</th>
+            <th>Is Availabe?</th>
+            <th>Issue</th>
+            <th>Return</th>
+            <th>Delete</th>
+        </tr>
+
+            <%  items.forEach((item)=>{ %>
+                <tr> 
+                <td><%=item.name%></td>
+                <td><%=item.author %></td>
+                <td><%=item.pages %></td>
+                <td><%= item.price%></td>
+                <td>
+                    <button><%=item.isAvailable%></button> 
+                </td>
+                <td> <form action="/issue" method="post">
+                        <button type="submit" name="bookName" value='<%=item.name%>'>issue</button>
+                    </form>
+                </td>
+                <td>
+                    <form action="/return" method="post">
+                        <button type="submit" name="bookName" value="<%=item.name%>">return</button>
+                    </form>
+                </td>
+                <td>
+                    <form action="/delete" method="post">
+                        <button type="submit" name="bookName" value="<%=item.name%>">delete</button>
+                    </form> 
+                </td>
+            </tr>
+           <% }) %>
+        </table>
+
+    </div>
+    <h1>Add book: </h1>
+    <div class="addbook">
+        <form action="/add" method="post">
+            <input type="text" name="name" placeholder="book name" required >
+            <input type="text" name="author" placeholder="book author" required>
+            <input type="number" name="pages" placeholder="book total pages" required>
+            <input type="number" name="price" placeholder="book price" required>
+           <br>
+           <input type="hidden" name="isAvailable" value=true>
+            <button type="submit">Add/Submit</button>
+        </form>
+        
+    </div>
+    <script src="scripts/script.js"  ></script>
+</body>
+</html>
